@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+  <meta charset="utf8">
+  <title>Zybooks Simulator</title>
+  <link rel="icon" href="logo.png">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+  <link href="min.css" rel="stylesheet" type="text/css"/>
+  <style>
+    textarea { resize: none; }
+    .centralized { text-align: center; }
+    .centralized pre { display: inline-block; text-align: left; }
+    footer { margin: 0 auto 16px; width: 100%; padding: 32px 0; text-align: center; }
+  </style>
+</head>
+<body>
+<nav class="nav" tabindex="-1">
+  <div class="container">
+    <a class="pagename current" href="#">Zybooks Simulator</a>
+  </div>
+</nav>
+<div id="app" class="container">
+    <div v-if="question && correctAnswer" class="centralized">
+        <p>Enter the output of the following Python program:</p>
+        <pre>{{ question }}</pre>
+        <div>{{ status }}</div>
+        <div v-if="next">{{ _.sample(memes) }}</div><!-- LoDash provides _.sample -->
+        <br>
+        <textarea id="user-input" v-model="userAnswer" rows="10" cols="120"
+                  placeholder="Now type your answer here..."></textarea>
+        <div v-if="next">
+            <button v-on:click="reload">Get another question</button>
+        </div>
+    </div>
+    <div v-else class="container centralized">
+        <p>Loading, please wait patiently…</p>
+    </div>
+</div>
+<footer>
+    Backend powered by Kotlin, Jedis, Javalin, Jackson
+    <br>
+    Frontend powered by Vue.js, axios, Lodash, min.css
+    <br>
+    Database powered by Redis
+    <br>
+    Program auto-gen powered by C#, Python3
+    <br>
+    Tools used: IntelliJ IDEA, Visual Studio
+</footer>
+<script src="logic.js"></script>
+</body>
